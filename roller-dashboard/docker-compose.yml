@@ -1,0 +1,39 @@
+version: '3'
+services:
+    roller-be:
+        container_name: BE
+        build:
+            context: .
+            dockerfile: ./docker/be.dockerfile
+        ports:
+            - "8888:8888"
+        extra_hosts:
+            - "keystone.openstack.svc.cluster.local:172.16.7.176"
+        volumes:
+            - .:/usr/src/app/roller-dashboard
+        networks:
+            - "net-roller"
+        command: python manage.py runserver 0.0.0.0:8888
+
+    roller-fe:
+        container_name: FE
+        build:
+            context: .
+            dockerfile: ./docker/fe.dockerfile
+        ports:
+            - "9000:9000"
+        links:
+            - roller-be
+        volumes:
+            - ./roller:/usr/src/app/roller
+            - node_modules:/usr/src/app/roller/node_modules
+            - jspm_packages:/usr/src/app/roller/jspm_packages
+        networks:
+            - "net-roller"
+        command: npm start
+volumes:
+    node_modules:
+    jspm_packages:
+networks:
+    net-roller:
+        driver: bridge

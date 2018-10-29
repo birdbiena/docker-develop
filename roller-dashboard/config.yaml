@@ -1,0 +1,6 @@
+SERVER_ADDRESS: "172.16.7.176"
+SERVER_PORT: "8001"
+KEYSTONE_USER: "coaster"
+KEYSTONE_PASS: "password"
+KEYSTONE_PORT: "80"
+KEYSTONE_ADDRESS: "keystone.openstack.svc.cluster.local"
