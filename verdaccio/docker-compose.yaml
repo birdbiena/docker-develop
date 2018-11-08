@@ -1,0 +1,14 @@
+version: '3'
+services:
+    verdaccio:
+        image: verdaccio/verdaccio:latest
+        container_name: modules
+        ports:
+            - "4873:4873"
+        volumes:
+            - "./docker/conf:/verdaccio/conf"
+            - "storage:/verdaccio/storage"
+        networks:
+            - "net-proxy"
+volumes:
+    storage:
