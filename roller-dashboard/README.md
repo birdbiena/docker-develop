@@ -5,7 +5,22 @@
 ![AngularJS](https://img.shields.io/badge/AngularJS-1.6.8-green.svg)
 ![webpack](https://img.shields.io/badge/webpack-4.x-green.svg)
 
-> 该项目通过使用[AngularJS 1.6.8](https://code.angularjs.org/1.6.8/docs/api)为基础框架，实现ECAS业务功能开发。项目中使用的相关组件参考package.json文件中"depenencies"中的依赖。全部业务功能开发使用HTML、CSS、Javascript实现，路由功能由前端组件实现SPA([ui.router](https://ui-router.github.io/ng1/))，代码书写参考[ES2015](https://www.w3schools.com/js/js_es6.asp)相关规范，本地调试使用Gulp结合JSPM完成"开发"和"生产"等模式的支持。项目开发中严格按照[AngularJS](https://github.com/Gillespie59/eslint-plugin-angular)、[Airbnb](https://github.com/airbnb/javascript)推荐规范执行，由于我们的基础框架使用AngularJS，所以我们同样引用"[John Papa](https://github.com/johnpapa)"定制的[AngularJS 1.x风格指南](https://github.com/johnpapa/angular-styleguide/blob/master/a1/i18n/zh-CN.md)来规范通过AngularJS框架开发的业务代码。同样我们在ECAS项目中，使用了Javascript新的标准[ES2015](https://www.w3schools.com/js/js_es6.asp)，这样对于"[John Papa](https://github.com/johnpapa)"定制的[AngularJS 1.x风格指南](https://github.com/johnpapa/angular-styleguide/blob/master/a1/i18n/zh-CN.md)插件有部分内容是不符合新标准的，但是大部分AngularJS 1.x的规范对我们是依然有效（有工具提示功能），我们保留了对我们项目规范中有益的部分规则，并且参考了AngularJS 1.x关于ES2015的最新标准，详见：[AngularJS 1.x风格指南（ES2015）](https://github.com/toddmotto/angularjs-styleguide/blob/master/i18n/zh-cn.md)，关于[Todd Motto](https://github.com/toddmotto)文档也是以[John Papa](https://github.com/johnpapa)的文档规范为基础，所以两者并不冲突。
+> 该项目通过使用[AngularJS 1.6.8](https://code.angularjs.org/1.6.8/docs/api)为基础框架，实现ECAS业务功能开发。
+> 项目中使用的相关组件参考package.json文件中"depenencies"中的依赖。全部业务功能开发使用HTML、CSS、Javascript实现，
+> 路由功能由前端组件实现SPA([ui.router](https://ui-router.github.io/ng1/))，
+> 代码书写参考[ES2015](https://www.w3schools.com/js/js_es6.asp)相关规范，
+> 本地调试使用Gulp结合JSPM完成"开发"和"生产"等模式的支持。
+> 项目开发中严格按照[AngularJS](https://github.com/Gillespie59/eslint-plugin-angular)、[Airbnb](https://github.com/airbnb/javascript)推荐规范执行，
+> 由于我们的基础框架使用AngularJS，
+> 所以我们同样引用"[John Papa](https://github.com/johnpapa)"定制的
+> [AngularJS 1.x风格指南](https://github.com/johnpapa/angular-styleguide/blob/master/a1/i18n/zh-CN.md)来规范通过AngularJS框架开发的业务代码。同样我们在ECAS项目中，使用了Javascript新的标准
+> [ES2015](https://www.w3schools.com/js/js_es6.asp)，
+> 这样对于"[John Papa](https://github.com/johnpapa)"定制的
+> [AngularJS 1.x风格指南](https://github.com/johnpapa/angular-styleguide/blob/master/a1/i18n/zh-CN.md)
+> 插件有部分内容是不符合新标准的，但是大部分AngularJS 1.x的规范对我们是依然有效（有工具提示功能），
+> 我们保留了对我们项目规范中有益的部分规则，并且参考了AngularJS 1.x关于ES2015的最新标准，
+> 详见：[AngularJS 1.x风格指南（ES2015）](https://github.com/toddmotto/angularjs-styleguide/blob/master/i18n/zh-cn.md)，关于[Todd Motto](https://github.com/toddmotto)文档也是以
+> [John Papa](https://github.com/johnpapa)的文档规范为基础，所以两者并不冲突。
 
 >> 关于Eslint的前端代码验证问题，首先开发人员应通过前端开发工具配置项目中已有Eslint验证规则（.eslintrc）文件，在代码编辑的过程中即可通过开发工具自动验证代码的规范及风格，后续文档中会说明前端团队开发工具具体的配置方法。其次，开发人员在代码提交之前，应手动在本地执行Eslint代码验证来确定提交代码是符合验证规范。
 
@@ -22,19 +37,74 @@
 
 ---
 
+## Docker开发环境
+> 安装 [docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/) 和 [docker-compose](https://docs.docker.com/compose/overview/)
+
+> 安装成功后配置公司镜像仓库
+
+> 创建 /etc/docker/daemon.json
+
+>> { "insecure-registries" : ["172.100.200.208"] }
+
+### docker-compose 相关命令
+```bash
+#构建服务及启动启动
+docker-compose up -d --build
+
+#终止服务
+docker-compose down
+
+#查看日志
+docker-compose logs -f roller-fe
+docker-compose logs -f roller-be
+```
+
 ## 环境部署
 
-### 原码下载
+### 配置公司pip源
+```bash
+vim /root/.pip/pip.conf
+
+[global]
+timeout=60
+index-url=http://pypi.easystack.cn/pypi/simple
+extra-index-url=https://mirrors.aliyun.com/pypi/simple/
+trusted-host=pypi.easystack.cn
+disable-pip-version-check = true
+```
+
+### 配置服务器接口映射
+> 添加可用Keystone地址
+
+```bash
+sudo vim /etc/hosts
+
+// IP地址随服务器运行地址更换
+172.16.7.176 keystone.openstack.svc.cluster.local
+172.16.7.176 busybox.openstack.svc.cluster.local
+```
+
+### 本地代理环境
+> 创建 /etc/roller/client/config.yaml
+
+```yaml
+SERVER_ADDRESS: "172.16.7.176" // "KeyStone地址，如：192.168.x.x"
+SERVER_PORT: "8001"
+KEYSTONE_USER: "coaster"
+KEYSTONE_PASS: "password"
+KEYSTONE_PORT: "80"
+KEYSTONE_ADDRESS: "keystone.openstack.svc.cluster.local" // "KeyStone地址，如：192.168.x.x"
+```
+
+### 下载项目源码
 ```bash
 git clone ssh://\<your name>@review.easystack.cn:29418/easystack/roller-dashboard
-git branch -b stable/5.0 v5.0
-cd roller_dashboard
+cd roller-dashboard
+git checkout -b stable/5.0 remotes/origin/stable/5.0
 ```
 
 ### 搭建后端开发环境
 ```bash
-cd roller_dashboard
-
 // 安装虚拟环境
 virtualenv .venv
 
@@ -73,38 +143,16 @@ cd roller
 npm install
 
 // 启动调试服务
-gulp serve
-
-// 构建项目代码
-gulp build
+npm start
 ```
-
-### 接口环境配置
-> 添加可用Keystone地址
-
-```bash
-sudo vim /etc/hosts
-
-// IP地址随服务器运行地址更换
-172.16.7.176 keystone.openstack.svc.cluster.local
-```
-
-### 本地代理环境
-> 创建 /etc/roller/client/config.yaml
-
-```yaml
-SERVER_ADDRESS: "172.16.7.176" // "KeyStone地址，如：192.168.x.x"
-SERVER_PORT: "8001"
-KEYSTONE_USER: "coaster"
-KEYSTONE_PASS: "password"
-KEYSTONE_PORT: "80"
-KEYSTONE_ADDRESS: "keystone.openstack.svc.cluster.local" // "KeyStone地址，如：192.168.x.x"
-```
+>打开浏览器输入 [http://0.0.0.0:9000/](http://0.0.0.0:9000/) 进入登录界面。
 
 ---
 
 ## ECAS前端目录
 ```bash
+5.0.1.3 版本项目目录结构
+
 ├── build (构建项目文件)
 ├── src (渲染进程代码目录)
 │   ├── app (项目目录)
@@ -128,7 +176,7 @@ KEYSTONE_ADDRESS: "keystone.openstack.svc.cluster.local" // "KeyStone地址，�
 │   │   │   ├── migrate (迁移)
 │   │   │   ├── dashboard.js (业务功能引用入口)
 │   │   │   └── translations.js (业务功能翻译)
-│   ├── assets (资源文件目录)
+│   ├── assets (资源文件目录)
 │   ├── public
 │   ├── index.html (渲染进程入口)
 │   └── routes.json (路由配置文件)
@@ -162,5 +210,10 @@ KEYSTONE_ADDRESS: "keystone.openstack.svc.cluster.local" // "KeyStone地址，�
 
 ---
 
-## Liense
-Copyright (c) Easystack Corporation. All rights reserved.
+## Test
+
+### 自测
+[ECAS项目测试用例](https://docs.google.com/spreadsheets/d/1nMLEd50xkcbPKpMyS8seNNWDkcRqldscaygrN_yIyKs/edit#gid=0)
+
+## License
+Copyright (c) EasyStack Corporation. All rights reserved.

@@ -8,11 +8,12 @@ services:
         ports:
             - "8888:8888"
         extra_hosts:
-            - "keystone.openstack.svc.cluster.local:172.16.7.176"
+            - "keystone.openstack.svc.cluster.local:172.16.9.208"
+            - "busybox.openstack.svc.cluster.local:172.16.9.208"
         volumes:
             - .:/usr/src/app/roller-dashboard
         networks:
-            - "net-roller"
+            - "app_net"
         command: python manage.py runserver 0.0.0.0:8888
 
     roller-fe:
@@ -29,11 +30,13 @@ services:
             - node_modules:/usr/src/app/roller/node_modules
             - jspm_packages:/usr/src/app/roller/jspm_packages
         networks:
-            - "net-roller"
+            - "app_net"
+        external_links:
+            - verdaccio
         command: npm start
 volumes:
     node_modules:
     jspm_packages:
 networks:
-    net-roller:
-        driver: bridge
+    app_net:
+        external: true
