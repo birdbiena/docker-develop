@@ -9,6 +9,10 @@ services:
             - "./docker/conf:/verdaccio/conf"
             - "storage:/verdaccio/storage"
         networks:
-            - "net-proxy"
+            - "app_net"
 volumes:
     storage:
+
+networks:
+    app_net:
+        external: true
