@@ -70,7 +70,7 @@ timeout=60
 index-url=http://pypi.easystack.cn/pypi/simple
 extra-index-url=https://mirrors.aliyun.com/pypi/simple/
 trusted-host=pypi.easystack.cn
-disable-pip-version-check = true
+disable-pip-version-check=true
 ```
 
 ### 配置服务器接口映射
