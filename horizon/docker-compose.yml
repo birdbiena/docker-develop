@@ -1,0 +1,62 @@
+version: '3'
+
+networks:
+    app_net:
+        external: true
+
+services:
+    nginx:
+        image: nginx
+        ports:
+            - "8888:8888"
+        volumes:
+            - "./docker/conf.d:/etc/nginx/conf.d"
+        networks:
+            - "app_net"
+        depends_on:
+            - horizon
+
+    memcached:
+        image: memcached
+        ports:
+            - "11211:11211"
+        networks:
+            - "app_net"
+
+    horizon:
+        build:
+            context: .
+            dockerfile: ./docker/be.dockerfile
+        ports:
+            - "8880:8880"
+        extra_hosts:
+            - "neutron.openstack.svc.cluster.local:192.168.1.160"
+            - "ceilometer.openstack.svc.cluster.local:192.168.1.160"
+            - "chakra.openstack.svc.cluster.local:192.168.1.160"
+            - "billing.openstack.svc.cluster.local:192.168.1.160"
+            - "heat.openstack.svc.cluster.local:192.168.1.160"
+            - "placement.openstack.svc.cluster.local:192.168.1.160"
+            - "keystone.openstack.svc.cluster.local:192.168.1.160"
+            - "murano.openstack.svc.cluster.local:192.168.1.160"
+            - "nova.openstack.svc.cluster.local:192.168.1.160"
+            - "ceph-rgw.ceph.svc.cluster.local:192.168.1.160"
+            - "ceph-rgw-api.ceph.svc.cluster.local:192.168.1.160"
+            - "sahara.openstack.svc.cluster.local:192.168.1.160"
+            - "trove.openstack.svc.cluster.local:192.168.1.160"
+            - "aodh.openstack.svc.cluster.local:192.168.1.160"
+            - "cloudformation.openstack.svc.cluster.local:192.168.1.160"
+            - "gnocchi.openstack.svc.cluster.local:192.168.1.160"
+            - "cinder.openstack.svc.cluster.local:192.168.1.160"
+            - "glance.openstack.svc.cluster.local:192.168.1.160"
+            - "ceph-rgw-ingress.ceph.svc.cluster.local:192.168.1.160"
+            - "keystone-api.openstack.svc.cluster.local:192.168.1.160"
+            - "mariadb.openstack.svc.cluster.local:192.168.1.160"
+            - "grafana.openstack.svc.cluster.local:192.168.1.160"
+            - "prometheus.openstack.svc.cluster.local:192.168.1.160"
+        volumes:
+            - .:/usr/src/app/horizon
+        depends_on:
+            - "memcached"
+        networks:
+            - "app_net"
+        command: python manage.py runserver 0.0.0.0:8880

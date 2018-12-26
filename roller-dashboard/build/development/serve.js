@@ -2,9 +2,7 @@ var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var historyApiFallback = require('connect-history-api-fallback');
 var proxy = require('http-proxy-middleware');
-
 var runSequence = require('run-sequence');
-
 var paths = require('../paths');
 
 var proxyContext = [
@@ -15,8 +13,8 @@ var proxyContext = [
 ];
 
 var proxyOptions = {
-    // target: 'http://127.0.0.1:8888', // local development model
-    target: 'http://roller-be:8888', // docker-composer development mode
+    target: 'http://127.0.0.1:8888', // local development model
+    // target: 'http://roller-be:8888', // docker-composer development mode
     changeOrigin: true,
     xfwd: true,
     autoRewrite: true

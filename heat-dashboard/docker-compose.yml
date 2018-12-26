@@ -1,0 +1,16 @@
+version: '3'
+
+networks:
+    app_net:
+        external: true
+
+services:
+    heat:
+        image: nginx
+        ports:
+            - "8881:8881"
+        volumes:
+            - ./docker/conf.d:/etc/nginx/conf.d
+            - ./static:/usr/share/nginx
+        networks:
+            - "app_net"

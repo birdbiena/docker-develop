@@ -1,0 +1,112 @@
+root: true
+globals:
+  angular: true
+  jQuery: true
+  System: true
+  $: true
+  echarts: true
+  django: true
+  pluralidx: true
+  pgettext: true
+  ngettext: true
+  npgettext: true
+  gettext: true
+  get_format: true
+  fabric: true
+  horizon: true
+  require: true
+  gulp: true
+  interpolate: true
+  WEBROOT: true
+  d3: true
+env:
+  browser: true
+  node: true
+  jquery: true
+  amd: true
+  commonjs: true
+  es6: true
+parserOptions:
+  ecmaVersion: 5
+  sourceType: "module"
+extends:
+  - "plugin:angular/johnpapa"
+  - "airbnb-base/legacy"
+plugins:
+  - "angular"
+rules:
+  #rule change for eslint-angular
+  angular/no-inline-template:
+    - "error"
+    -
+      allowSimple: true
+  angular/no-services:
+    - "warn"
+    -
+      - "http"
+      - "resource"
+  angular/di: "off"
+  angular/function-type: "off"
+  angular/file-name: "off"
+  angular/controller-name: "off"
+  angular/no-run-logic: "off"
+  angular/no-service-method: "off"
+  angular/module-getter: "off"
+  #rule change for eslint-airbnb
+  #For wrap-iife: enforces always wrapping the function expression.
+  wrap-iife:
+   - "error"
+   - "inside"
+   -
+     functionPrototypeMethods: false
+  #For no-underscore-dangle: allow dangling underscores in identifiers
+  no-underscore-dangle: "off"
+  #For one-var:  requires one variable declaration per scope
+  one-var:
+   - "error"
+   - "always"
+  #For func-names: function expressions no need to have a name
+  func-names: "off"
+  #For indent: change the indent to 4
+  indent:
+   - "error"
+   - 4
+   -
+     SwitchCase: 1
+     VariableDeclarator: 1
+     outerIIFEBody: 1
+     FunctionDeclaration:
+       parameters: 1
+       body: 1
+     FunctionExpression:
+       parameters: 1
+       body: 1
+     CallExpression:
+       arguments: 1
+     ArrayExpression: 1
+     ObjectExpression: 1
+     ImportDeclaration: 1
+     flatTernaryExpressions: false
+     ignoredNodes:
+      - 'JSXElement'
+      - 'JSXElement *'
+  #For max-len: change the maximum line length to 200
+  max-len:
+   - "error"
+   -
+     code: 200
+     tabWidth: 4
+     ignoreComments: false
+     ignoreUrls: true
+     ignoreRegExpLiterals: true
+     ignoreStrings: true
+     ignoreTemplateLiterals: true
+  #For no-use-before-define: allow the function to be called before the declaration
+  no-use-before-define:
+   - "error"
+   -
+     functions: false
+     classes: true
+     variables: true
+  no-param-reassign: "off"
+  radix: "off"

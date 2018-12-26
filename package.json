@@ -1,0 +1,27 @@
+{
+    "name": "docker-develop",
+    "version": "1.0.0",
+    "description": "docker develop code",
+    "main": "index.js",
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "engines": {
+        "node": "~ 6.12.2",
+        "npm": "~ 3.10.10"
+    },
+    "devDependencies": {
+        "eslint": "^5.6.0",
+        "eslint-config-airbnb-base": "^13.1.0",
+        "eslint-friendly-formatter": "^4.0.1",
+        "eslint-loader": "^2.1.1",
+        "eslint-plugin-angular": "^3.3.0",
+        "eslint-plugin-import": "^2.14.0"
+    },
+    "scripts": {
+        "dev": "webpack --config webpack.config.js --mode development",
+        "build": "webpack --config webpack.config.js --mode production --progress",
+        "server": "webpack-dev-server --mode development --progress --watch"
+    },
+    "dependencies": {}
+}
