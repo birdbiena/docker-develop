@@ -62,6 +62,7 @@
         "ng-annotate-webpack-plugin": "^0.3.0",
         "node-sass": "^4.9.3",
         "optimize-css-assets-webpack-plugin": "^5.0.1",
+        "pre-commit": "^1.2.2",
         "raw-loader": "^0.5.1",
         "require-dir": "^0.3.2",
         "run-sequence": "^2.2.1",
